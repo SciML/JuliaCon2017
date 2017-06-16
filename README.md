@@ -3,7 +3,7 @@
 These are the notebook slides used for the JuliaCon 2017 presentation "The Unique Features and Performance of DifferentialEquations.jl" by Chris Rackauckas.
 
 - [Notebook](http://nbviewer.jupyter.org/github/JuliaDiffEq/JuliaCon2017/blob/master/Notebooks/DiffEqJuliaCon2017.ipynb)
-- [Slides](http://juliadiffeq.org/JuliaCon2017/Slides/DiffEqJuliaCon2017)
+- [Slides](http://nbviewer.jupyter.org/format/slides/github/JuliaDiffEq/JuliaCon2017/blob/master/Notebooks/DiffEqJuliaCon2017.ipynb)
 
 # Live Notebooks
 
