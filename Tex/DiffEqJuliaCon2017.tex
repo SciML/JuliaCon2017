@@ -726,7 +726,11 @@ type}\label{differentialequations.jl-respects-the-users-input-type}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-14.
+14.778112197857341
+14.7781121978613
+22.167168296786013
+22.16716829679195
+
     \end{Verbatim}
 
     \subsection{DifferentialEquations.jl is unique when speed
@@ -1053,7 +1057,7 @@ These types of models are related to differential equations
 \end{itemize}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
          
          \PY{n}{rate} \PY{o}{=} \PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{\PYZhy{}\PYZgt{}} \PY{p}{(}\PY{l+m+mf}{0.1}\PY{o}{/}\PY{l+m+mf}{1000.0}\PY{p}{)}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
          \PY{n}{jump\PYZus{}affect!} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{integrator}\PY{p}{)}
@@ -1074,14 +1078,14 @@ These types of models are related to differential equations
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
 \end{Verbatim}
 
     \subsection{Mix jumps and differential
 equations}\label{mix-jumps-and-differential-equations}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
            \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000} \PY{o}{\PYZhy{}} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000}
          \PY{k}{end}
          \PY{n}{diff\PYZus{}g} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
@@ -1271,7 +1275,7 @@ WARNING: using NLopt.population in module Main conflicts with an existing identi
     \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}36}]:} (0.009874582531472897,[1.51121,1.00488,2.9638,0.987147],:ROUNDOFF\_LIMITED)
+{\color{outcolor}Out[{\color{outcolor}36}]:} (0.0038439610325858376,[1.50034,0.999574,2.99759,0.998632],:ROUNDOFF\_LIMITED)
 \end{Verbatim}
         
     \subsection{What's Next?}\label{whats-next}

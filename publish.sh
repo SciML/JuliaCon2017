@@ -34,13 +34,13 @@ for f in "${arr[@]}"; do
    mv Notebooks/"$filename".tex  Tex/"$filename".tex
 
    # Convert the Notebook to Pdf
-   cp Notebooks/"$filename".ipynb src/"$filename".ipynb
-   cd src
-   jupyter-nbconvert --to pdf "$filename".ipynb
+   # cp Notebooks/"$filename".ipynb src/"$filename".ipynb
+   # cd src
+   # jupyter-nbconvert --to pdf "$filename".ipynb
    # Move to the html directory
-   mv "$filename".pdf  ../Pdfs/"$filename".pdf
-   rm "$filename".ipynb
-   cd ..
+   # mv "$filename".pdf  ../Pdfs/"$filename".pdf
+   # rm "$filename".ipynb
+   # cd ..
 done
 
 # Push the updates to gh-pages
