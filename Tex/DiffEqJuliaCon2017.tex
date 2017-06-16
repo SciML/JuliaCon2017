@@ -1,0 +1,1335 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font than Computer Modern for most use cases
+    \usepackage{palatino}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{DiffEqJuliaCon2017}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{The Unique Features and Performance of
+DifferentialEquations.jl}\label{the-unique-features-and-performance-of-differentialequations.jl}
+
+ \#\#\# JuliaCon 2017 \#\#\# Chris Rackauckas \#\#\# University of
+California, Irvine
+
+    \subsection{Quick About Me}\label{quick-about-me}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  PhD Candidate at UC Irvine
+\item
+  Research in:
+\item
+  Numerical methods for stochastic ODEs/PDEs
+\item
+  Multiscale and spatial biological simulations
+\item
+  Effects of stochasticity in gene regulatory networks
+\item
+  I created DiffEq because it was necessary:
+\item
+  No software was using the latest methods
+\item
+  I wanted the latest and fastest methods to benchmark against
+\item
+  I am too lazy to change my code around: everything needs one interface
+\item
+  I wanted to be able to use these methods to build large biological
+  models
+\item
+  I wanted parallel computing to be part of the design
+\item
+  I wanted tools to be able to match models to data
+\end{itemize}
+
+    \section{DifferentialEquations.jl is about
+modeling}\label{differentialequations.jl-is-about-modeling}
+
+    \subsection{Scientific laws, theories, and
+experiments}\label{scientific-laws-theories-and-experiments}
+
+\subsection{tell us how things change}\label{tell-us-how-things-change}
+
+\subsection{Differential equations give a mechanistic
+model}\label{differential-equations-give-a-mechanistic-model}
+
+\subsection{Differential equations map ``change'' to
+simulations}\label{differential-equations-map-change-to-simulations}
+
+Differential equations bridge from models to predictions
+
+    \subsection{Differential Equations vs Machine
+Learning}\label{differential-equations-vs-machine-learning}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  The models are different
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Machine learning uses general non-mechanistic models
+  \item
+    Differential equations utilize knowledge about the structure of the
+    problem
+  \end{itemize}
+\item
+  The reliance on data is different
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Machine learning needs to learn from data
+  \item
+    Machine learning models stack simple models together
+  \item
+    DE models are complex and nonlinear
+  \item
+    DE can model without data, or can calibrate to data
+  \item
+    DE have fewer parameters, and can be learned with less data
+  \end{itemize}
+\item
+  Both are used to create predictions
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Ordinary and partial differential equations are the standard tools
+    of physics
+  \item
+    Stochastic differential equations are a standard tool in stock
+    market analysis
+  \end{itemize}
+\end{itemize}
+
+    \subsection{There are many types of differential
+equations}\label{there-are-many-types-of-differential-equations}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Ordinary differential equations evolve over one variable (let's call
+  this time)
+\item
+  Systems of differential equations evolve multiple quantities at the
+  same time
+\item
+  Stochastic differential equations add randomness (referred to as
+  ``noise'')
+\item
+  Delay differential equations allow for delayed interactions
+\item
+  Gillespie simulations evolve discrete quantities via a stochastic
+  model
+\item
+  Partial differential equations evolve over multiple variables (space
+  and time)
+\end{itemize}
+
+DifferentialEquations.jl incorporates all of these under a single
+interface
+
+    \subsection{Problem 1: Ordinary Differential
+Equations}\label{problem-1-ordinary-differential-equations}
+
+http://docs.juliadiffeq.org/latest/tutorials/ode\_example.html
+
+\[\frac{du(t)}{dt} = f(t,u(t))\]
+
+where $u(t_0) = u_0$ is the known initial value. We want to know $u(t)$
+for $t\in[t_0,t_f]$
+
+    \subsection{Exponential Growth Model}\label{exponential-growth-model}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  My money has been temporarily stolen by the banking cartel (it's in
+  the bank)
+\item
+  My money grows at a rate of 98\% per year due to interest (really good
+  bank)
+\item
+  I start with \$1: How much will I have in 5 years?
+\end{itemize}
+
+\[ \frac{du}{dt} = 0.98u \]
+
+\[u(0)=1\]
+
+Solve for $u(t)$ for $t\in[0,5]$
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{using} \PY{n}{DifferentialEquations}
+        \PY{n}{f}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{l+m+mf}{0.98}\PY{o}{*}\PY{n}{u}
+        \PY{n}{u0}\PY{o}{=}\PY{l+m+mf}{1.0}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{5.0}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}
+         \PY{c}{\PYZsh{} Use the plot recipe, along with some plotting attributes}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{My Bank Account}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+              \PY{n}{xaxis}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Time (t)}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{n}{yaxis}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZbs{}}\PY{l+s}{\PYZdl{}}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{n}{legend}\PY{o}{=}\PY{n}{false}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Controlling the Solvers}\label{controlling-the-solvers}
+
+See http://docs.juliadiffeq.org/latest/basics/common\_solver\_opts.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{length}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{abstol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}6}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}6}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{length}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{saveat}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}6}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{tstops}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}6}\PY{p}{,}\PY{n}{save\PYZus{}everystep}\PY{o}{=}\PY{n}{false}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+11
+15
+[0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0]
+[0.0,0.0634774,0.221501,0.43294,0.5,0.696266,0.923443,1.20696,1.53056,1.89898,2.30449,2.74501,3.21551,3.71248,4.23208,4.77109,5.0]
+[0.0,5.0]
+
+    \end{Verbatim}
+
+    \subsection{Analyzing the Solution}\label{analyzing-the-solution}
+
+http://docs.juliadiffeq.org/latest/basics/solution.html
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)} \PY{c}{\PYZsh{} 5th timepoint}
+         \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)} \PY{c}{\PYZsh{} 5th timepoint value}
+         \PY{n}{println}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{o}{+}\PY{l+m+mi}{2}\PY{n}{u} \PY{k}{for} \PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{k}{in} \PY{n}{zip}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{,}\PY{n}{sol}\PY{o}{.}\PY{n}{u}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.106052911995544
+2.956279956560924
+[2.0,2.30727,3.17657,4.63952,7.01861,11.2071,18.9435,34.2493,66.3366,137.407,273.572]
+
+    \end{Verbatim}
+
+    DifferentialEquations.jl comes with interpolations on the solution type
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{sol}\PY{p}{(}\PY{l+m+mf}{0.45}\PY{p}{)} \PY{c}{\PYZsh{} The value of the solution at t=0.45}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 1.5542610480525965
+\end{Verbatim}
+        
+    \subsection{Choosing Solvers}\label{choosing-solvers}
+
+http://docs.juliadiffeq.org/latest/solvers/ode\_solve.html
+
+DifferentialEquations.jl is composed of many (30+?) packages which
+together provide its functionality under one interface. For Ordinary
+Differential Equations, we have:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  OrdinaryDiffEq.jl: native Julia library. Fully featured, and in many
+  cases faster than the classic C/Fortran libraries.
+\item
+  Sundials.jl: provides Adams and BDF methods. A standard library
+\item
+  LSODA.jl: provides the stability-detecting LSODA algorithm
+\item
+  ODEInterface.jl: provides classic Fortran algorithms like
+  \texttt{dopri} and \texttt{radau}
+\item
+  ODE.jl: backwards compatibility
+\end{itemize}
+
+DifferentialEquations.jl also provides automatic detection of the
+appropriate algorithm
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c}{\PYZsh{} Automatically uses CVODE\PYZus{}BDF from Sundials}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{alg\PYZus{}hints}\PY{o}{=}\PY{p}{[}\PY{p}{:}\PY{n}{stiff}\PY{p}{]}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{,}\PY{n}{abstol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{)} 
+         \PY{c}{\PYZsh{} Use Tsit5 from OrdinaryDiffEq}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;} 
+         \PY{c}{\PYZsh{} Use CVODE\PYZus{}BDF from Sundials}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{CVODE\PYZus{}BDF}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;} 
+         \PY{k}{using} \PY{n}{ODEInterfaceDiffEq}
+         \PY{c}{\PYZsh{} Use radau from ODEInterfaceDiffEq}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{radau}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \subsection{The \texttt{*DiffEq} Libraries}\label{the-diffeq-libraries}
+
+The \texttt{*DiffEq} libraries (OrdinaryDiffEq.jl, StochasticDiffEq.jl,
+DelayDiffEq.jl) are the native Julia solvers. They have a lot of unique
+features:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  They routinely benchmark as the fastest implementations
+\item
+  They have cheap/free high order interpolations (will show in a
+  second!)
+\item
+  They have expressive event handling
+\item
+  They can handle generic \texttt{Number} and \texttt{AbstractArray}
+  types
+\end{itemize}
+
+The wrapped libraries, while classics (Sundials.jl,
+ODEInterfaceDiffEq.jl) are restricted to \texttt{Vector\{Float64\}}.
+
+http://docs.juliadiffeq.org/latest/basics/compatibility\_chart.html
+
+    \subsection{Method Recommendations}\label{method-recommendations}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{BS3()} for fast low accuracy non-stiff
+\item
+  \texttt{Tsit5()} for standard non-stiff. This is the first algorithm
+  to try in most cases.
+\item
+  \texttt{Vern7()} for high accuracy non-stiff
+\item
+  \texttt{Rosenbrock23()} for stiff equations with Julia-defined types,
+  events, etc.
+\item
+  \texttt{radau()} for stiff equations at higher accuracy on
+  \texttt{Vector\{Float64\}}
+\item
+  \texttt{CVODE\_BDF()} for large stiff equations (discretizations of
+  PDEs) on \texttt{Vector\{Float64\}}
+\end{itemize}
+
+    \subsection{Translations from
+MATLAB/Python/R}\label{translations-from-matlabpythonr}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \texttt{ode23} --\textgreater{} \texttt{BS3()}
+\item
+  \texttt{ode45}/\texttt{dopri5} --\textgreater{} \texttt{DP5()}, though
+  in most cases \texttt{Tsit5()} is more efficient
+\item
+  \texttt{ode23s} --\textgreater{} \texttt{Rosenbrock23()}
+\item
+  \texttt{ode113} --\textgreater{} \texttt{CVODE\_Adams()}, though in
+  many cases \texttt{Vern7()} or \texttt{Vern8()} are more efficient
+\item
+  \texttt{dop853} --\textgreater{} \texttt{DP8()}, though in most cases
+  \texttt{Vern7()} or \texttt{Vern8()} are more efficient
+\item
+  \texttt{ode15s}/\texttt{vode} --\textgreater{} \texttt{CVODE\_BDF()},
+  though in many cases \texttt{radau()} is more efficient
+\item
+  \texttt{ode23t} --\textgreater{} \texttt{Trapezoid()}
+\item
+  \texttt{lsoda} --\textgreater{} \texttt{lsoda()} (requires
+  \texttt{Pkg.add("LSODA"); using LSODA})
+\item
+  \texttt{ode15i} --\textgreater{} \texttt{IDA()}
+\end{itemize}
+
+    \subsection{Example 2: Systems of Differential
+Equations}\label{example-2-systems-of-differential-equations}
+
+\[
+\begin{align}
+\frac{dx}{dt} &= σ(y-x) \\
+\frac{dy}{dt} &= x(ρ-z) - y \\
+\frac{dz}{dt} &= xy - βz \\
+\end{align}
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{lorenz}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+         \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{10.0}\PY{p}{(}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{p}{(}\PY{l+m+mf}{28.0}\PY{o}{\PYZhy{}}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{8}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+        \PY{k}{end}
+        \PY{n}{u0} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{;}\PY{l+m+mf}{0.0}\PY{p}{;}\PY{l+m+mf}{0.0}\PY{p}{]}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{100.0}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{lorenz}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \subsection{The Plot Recipe Interpolates and Does Phase
+Plots}\label{the-plot-recipe-interpolates-and-does-phase-plots}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}\PY{n}{denseplot}\PY{o}{=}\PY{n}{false}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{ParameterizedFunctions}\label{parameterizedfunctions}
+
+\[
+\begin{align}
+\frac{dx}{dt} &= σ(y-x) \\
+\frac{dy}{dt} &= x(ρ-z) - y \\
+\frac{dz}{dt} &= xy - βz \\
+\end{align}
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{g} \PY{o}{=} \PY{p}{@}\PY{n}{ode\PYZus{}def\PYZus{}nohes} \PY{n}{LorenzExample} \PY{k}{begin}
+          \PY{n}{dx} \PY{o}{=} \PY{n}{σ}\PY{o}{*}\PY{p}{(}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+          \PY{n}{dy} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{p}{(}\PY{n}{ρ}\PY{o}{\PYZhy{}}\PY{n}{z}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y}
+          \PY{n}{dz} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{β}\PY{o}{*}\PY{n}{z}
+        \PY{k}{end} \PY{n}{σ}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{l+m+mf}{10.0} \PY{n}{ρ}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{l+m+mf}{28.0} \PY{n}{β}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (::LorenzExample) (generic function with 15 methods)
+\end{Verbatim}
+        
+    \subsection{DifferentialEquations.jl respects the user's input
+type}\label{differentialequations.jl-respects-the-users-input-type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{using} \PY{n}{StaticArrays}\PY{p}{,} \PY{n}{DifferentialEquations}
+        \PY{n}{A}  \PY{o}{=} \PY{n}{big}\PY{o}{.}\PY{p}{(}\PY{p}{@}\PY{n}{SMatrix} \PY{p}{[} \PY{l+m+mf}{1.0}  \PY{l+m+mf}{0.0} \PY{l+m+mf}{0.0} \PY{o}{\PYZhy{}}\PY{l+m+mf}{5.0}
+                        \PY{l+m+mf}{4.0} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.0} \PY{l+m+mf}{4.0} \PY{o}{\PYZhy{}}\PY{l+m+mf}{3.0}
+                       \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.0}  \PY{l+m+mf}{0.0} \PY{l+m+mf}{0.0}  \PY{l+m+mf}{1.0}
+                        \PY{l+m+mf}{5.0} \PY{o}{\PYZhy{}}\PY{l+m+mf}{2.0} \PY{l+m+mf}{2.0}  \PY{l+m+mf}{3.0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{u0} \PY{o}{=} \PY{n}{big}\PY{o}{.}\PY{p}{(}\PY{p}{@}\PY{n}{SMatrix} \PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{)}
+        \PY{n}{f\PYZus{}SA}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{n}{A}\PY{o}{*}\PY{n}{u}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{f\PYZus{}SA}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
+\end{Verbatim}
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{using} \PY{n}{Unitful}
+        \PY{n}{f\PYZus{}units}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{y}\PY{p}{)} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{y} \PY{o}{/} \PY{l+m+mf}{3.0}\PY{n}{u}\PY{l+s}{\PYZdq{}}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}
+        \PY{n}{u0} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{n}{u}\PY{l+s}{\PYZdq{}}\PY{l+s}{N}\PY{l+s}{\PYZdq{}}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{f\PYZus{}units}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{n}{u}\PY{l+s}{\PYZdq{}}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{n}{u}\PY{l+s}{\PYZdq{}}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=}\PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+        \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{[}\PY{k}{end}\PY{p}{]}\PY{p}{)}
+        \PY{n}{println}\PY{p}{(}\PY{n}{sol}\PY{p}{[}\PY{k}{end}\PY{p}{]}\PY{p}{)}
+        \PY{n}{sol}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{n}{u}\PY{l+s}{\PYZdq{}}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.0 s
+1.1813604129914028 N
+
+    \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 1.0869040537266441 N
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{SymEngine}
+        \PY{n}{y0} \PY{o}{=} \PY{n}{symbols}\PY{p}{(}\PY{p}{:}\PY{n}{y0}\PY{p}{)}
+        \PY{n}{u0} \PY{o}{=} \PY{n}{y0}
+        \PY{n}{f\PYZus{}sym}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{l+m+mi}{2}\PY{n}{u}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{f\PYZus{}sym}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{RK4}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+        
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{RK4}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{end\PYZus{}solution}  \PY{o}{=} \PY{n}{lambdify}\PY{p}{(}\PY{n}{sol}\PY{p}{[}\PY{k}{end}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{println}\PY{p}{(}\PY{n}{end\PYZus{}solution}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} 14.778112197857341}
+        \PY{n}{println}\PY{p}{(}\PY{l+m+mi}{2}\PY{n}{exp}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} 14.7781121978613}
+        \PY{n}{println}\PY{p}{(}\PY{n}{end\PYZus{}solution}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} 22.167168296786013}
+        \PY{n}{println}\PY{p}{(}\PY{l+m+mi}{3}\PY{n}{exp}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} 22.16716829679195}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+14.778112197857341
+14.7781121978613
+22.167168296786013
+22.16716829679195
+
+    \end{Verbatim}
+
+    \subsection{DifferentialEquations.jl is unique when speed
+matters}\label{differentialequations.jl-is-unique-when-speed-matters}
+
+DifferentialEquations.jl is a research lab which includes many new
+methods
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{,} \PY{n}{ODEInterfaceDiffEq}\PY{p}{,} \PY{n}{ODE}
+        \PY{c}{\PYZsh{} 2D Linear ODE}
+        \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{test\PYZus{}f}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{k}{in} \PY{l+m+mi}{1}\PY{p}{:}\PY{n}{length}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+            \PY{n}{du}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.01}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+          \PY{k}{end}
+        \PY{k}{end}
+        \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{test\PYZus{}f}\PY{p}{(}\PY{p}{:}\PY{p}{:}\PY{n}{Type}\PY{p}{\PYZob{}}\PY{n}{Val}\PY{p}{\PYZob{}}\PY{p}{:}\PY{n}{analytic}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{n}{t}\PY{p}{,}\PY{n}{u₀}\PY{p}{)}
+          \PY{n}{u₀}\PY{o}{*}\PY{n}{exp}\PY{p}{(}\PY{l+m+mf}{1.01}\PY{o}{*}\PY{n}{t}\PY{p}{)}
+        \PY{k}{end}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{10.0}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{test\PYZus{}f}\PY{p}{,}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        
+        \PY{n}{abstols} \PY{o}{=} \PY{l+m+mf}{1.}\PY{o}{/}\PY{l+m+mf}{10.}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{13}\PY{p}{)}
+        \PY{n}{reltols} \PY{o}{=} \PY{l+m+mf}{1.}\PY{o}{/}\PY{l+m+mf}{10.}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+        \PY{n}{setups} \PY{o}{=} \PY{p}{[}\PY{n}{Dict}\PY{p}{(}\PY{p}{:}\PY{n}{alg}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{n}{DP5}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{Dict}\PY{p}{(}\PY{p}{:}\PY{n}{alg}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{n}{ode45}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{Dict}\PY{p}{(}\PY{p}{:}\PY{n}{alg}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{n}{dopri5}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{Dict}\PY{p}{(}\PY{p}{:}\PY{n}{alg}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+        \PY{n}{names} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{DifferentialEquations}\PY{l+s}{\PYZdq{}}\PY{p}{;}\PY{l+s}{\PYZdq{}}\PY{l+s}{ODE}\PY{l+s}{\PYZdq{}}\PY{p}{;}\PY{l+s}{\PYZdq{}}\PY{l+s}{ODEInterface}\PY{l+s}{\PYZdq{}}\PY{p}{;}\PY{l+s}{\PYZdq{}}\PY{l+s}{DifferentialEquations Tsit5}\PY{l+s}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{wp} \PY{o}{=} \PY{n}{ode\PYZus{}workprecision\PYZus{}set}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{abstols}\PY{p}{,}\PY{n}{reltols}\PY{p}{,}\PY{n}{setups}\PY{p}{;}\PY{n}{names}\PY{o}{=}\PY{n}{names}\PY{p}{,}\PY{n}{save\PYZus{}everystep}\PY{o}{=}\PY{n}{false}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{wp}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Callbacks and Event
+Handling}\label{callbacks-and-event-handling}
+
+You can directly apply dynamic behavior to an ODE through its callbacks
+and event handling
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{b\PYZus{}condition}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{integrator}\PY{p}{)} \PY{c}{\PYZsh{} Event when event\PYZus{}f(t,u) == 0}
+          \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{k}{end}
+        
+        \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{b\PYZus{}affect}\PY{o}{!}\PY{p}{(}\PY{n}{integrator}\PY{p}{)}
+          \PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+        \PY{k}{end}
+        
+        \PY{n}{cb} \PY{o}{=} \PY{n}{ContinuousCallback}\PY{p}{(}\PY{n}{b\PYZus{}condition}\PY{p}{,}\PY{n}{b\PYZus{}affect!}\PY{p}{)}
+        
+        \PY{n}{bb} \PY{o}{=} \PY{p}{@}\PY{n}{ode\PYZus{}def\PYZus{}bare} \PY{n}{BallBounce} \PY{k}{begin}
+          \PY{n}{dy} \PY{o}{=}  \PY{n}{v}
+          \PY{n}{dv} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{g}
+        \PY{k}{end} \PY{n}{g}\PY{o}{=}\PY{l+m+mf}{9.81}
+        
+        \PY{n}{u0} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{50.0}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{]}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{15.0}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{bb}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{callback}\PY{o}{=}\PY{n}{cb}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{plotdensity}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Pretty much anything can be changed with the
+integrator}\label{pretty-much-anything-can-be-changed-with-the-integrator}
+
+Let's model a growing cell population
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Each cell has an internal protein \texttt{X}
+\item
+  When the concentration of \texttt{X} hits 1, the cell divides
+\item
+  When there are more cells, there is less food and so \texttt{X} is
+  created less rapidly
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}
+        \PY{k+kd}{const} \PY{n}{α} \PY{o}{=} \PY{l+m+mf}{0.3}
+        \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{growth}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{k}{in} \PY{l+m+mi}{1}\PY{p}{:}\PY{n}{length}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+            \PY{n}{du}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{α}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n}{length}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+          \PY{k}{end}
+        \PY{k}{end}
+        
+        \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{condition}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{integrator}\PY{p}{)} \PY{c}{\PYZsh{} Event when event\PYZus{}f(t,u) == 0}
+          \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{maximum}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+        \PY{k}{end}
+        
+        \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{affect}\PY{o}{!}\PY{p}{(}\PY{n}{integrator}\PY{p}{)}
+          \PY{n}{u} \PY{o}{=} \PY{n}{integrator}\PY{o}{.}\PY{n}{u}
+          \PY{n}{resize!}\PY{p}{(}\PY{n}{integrator}\PY{p}{,}\PY{n}{length}\PY{p}{(}\PY{n}{u}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{maxidx} \PY{o}{=} \PY{n}{findmax}\PY{p}{(}\PY{n}{u}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+            \PY{o}{\PYZhy{}}   \PY{n}{Θ} \PY{o}{=} \PY{n}{rand}\PY{p}{(}\PY{p}{)}
+          \PY{n}{u}\PY{p}{[}\PY{n}{maxidx}\PY{p}{]} \PY{o}{=} \PY{n}{Θ}
+          \PY{n}{u}\PY{p}{[}\PY{k}{end}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{Θ}
+          \PY{n}{length}\PY{p}{(}\PY{n}{u}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{10} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{terminate!}\PY{p}{(}\PY{n}{integrator}\PY{p}{)}
+          \PY{n}{nothing}
+        \PY{k}{end}
+        
+        \PY{n}{callback} \PY{o}{=} \PY{n}{ContinuousCallback}\PY{p}{(}\PY{n}{condition}\PY{p}{,}\PY{n}{affect!}\PY{p}{)}
+        \PY{n}{u0} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.2}\PY{p}{]}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{100.0}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{growth}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{callback}\PY{o}{=}\PY{n}{callback}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{,}\PY{n}{map}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{\PYZhy{}\PYZgt{}}\PY{n}{length}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,}\PY{n}{sol}\PY{p}{[}\PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}
+             \PY{n}{ylabel}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Number of Cells}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{n}{xlabel}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Time}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{ts} \PY{o}{=} \PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{sol}\PY{o}{.}\PY{n}{t}\PY{p}{[}\PY{k}{end}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{ts}\PY{p}{,}\PY{n}{map}\PY{p}{(}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{\PYZhy{}\PYZgt{}}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{sol}\PY{o}{.}\PY{p}{(}\PY{n}{ts}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,}
+             \PY{n}{ylabel}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Amount of X in Cell 1}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{n}{xlabel}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Time}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{This flexibility takes DiffEq from equation solver to
+simluation
+engine}\label{this-flexibility-takes-diffeq-from-equation-solver-to-simluation-engine}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Abstract types can be used to encode complex models
+\item
+  Integrators and event handling gives dynamic interactions
+\item
+  Speed, control, adaptivity, plotting, etc. then all comes for free!
+\end{itemize}
+
+This leads to more sustainable scientific software development:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Many scientific projects develop their own internal solvers for their
+  models
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    This requires a lot of extra time!
+  \item
+    How well tested is it? How well optimized is it? How maintainable is
+    it?
+  \item
+    Is it using all of the latest PI-stepsize adaptivity? Verner's
+    coefficients? etc.?
+  \end{itemize}
+\item
+  DifferentialEquations.jl is thus ideal as a core engine in complex
+  models
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    Developer-friendly dependency management, MIT licensed
+  \item
+    Active developer channels (Gitter, or anywhere\ldots{})
+  \end{itemize}
+\end{itemize}
+
+    \subsection{Example: Multiscale Biological
+Models}\label{example-multiscale-biological-models}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{using} \PY{n}{MultiScaleArrays}
+        \PY{k}{using} \PY{n}{OrdinaryDiffEq}\PY{p}{,} \PY{n}{DiffEqBase}\PY{p}{,} \PY{n}{StochasticDiffEq}
+        
+        \PY{c}{\PYZsh{} Define a hierarchy}
+        
+        \PY{k}{immutable} \PY{n}{Cell}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}} \PY{o}{\PYZlt{}:} \PY{n}{AbstractMultiScaleArrayLeaf}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{x}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+        \PY{k}{end}
+        \PY{k}{immutable} \PY{n}{Population}\PY{p}{\PYZob{}}\PY{n}{T}\PY{o}{\PYZlt{}:}\PY{n}{AbstractMultiScaleArray}\PY{p}{,}\PY{n}{B}\PY{o}{\PYZlt{}:}\PY{n}{Number}\PY{p}{\PYZcb{}} \PY{o}{\PYZlt{}:} \PY{n}{AbstractMultiScaleArray}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{x}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{T}\PY{p}{\PYZcb{}}
+          \PY{n}{y}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{end\PYZus{}idxs}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{k+kt}{Int}\PY{p}{\PYZcb{}}
+        \PY{k}{end}
+        \PY{k}{immutable} \PY{n}{Tissue}\PY{p}{\PYZob{}}\PY{n}{T}\PY{o}{\PYZlt{}:}\PY{n}{AbstractMultiScaleArray}\PY{p}{,}\PY{n}{B}\PY{o}{\PYZlt{}:}\PY{n}{Number}\PY{p}{\PYZcb{}} \PY{o}{\PYZlt{}:} \PY{n}{AbstractMultiScaleArray}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{x}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{T}\PY{p}{\PYZcb{}}
+          \PY{n}{y}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{end\PYZus{}idxs}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{k+kt}{Int}\PY{p}{\PYZcb{}}
+        \PY{k}{end}
+        \PY{k}{immutable} \PY{n}{Embryo}\PY{p}{\PYZob{}}\PY{n}{T}\PY{o}{\PYZlt{}:}\PY{n}{AbstractMultiScaleArray}\PY{p}{,}\PY{n}{B}\PY{o}{\PYZlt{}:}\PY{n}{Number}\PY{p}{\PYZcb{}} \PY{o}{\PYZlt{}:} \PY{n}{AbstractMultiScaleArrayHead}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{x}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{T}\PY{p}{\PYZcb{}}
+          \PY{n}{y}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{n}{B}\PY{p}{\PYZcb{}}
+          \PY{n}{end\PYZus{}idxs}\PY{p}{:}\PY{p}{:}\PY{n}{Vector}\PY{p}{\PYZob{}}\PY{k+kt}{Int}\PY{p}{\PYZcb{}}
+        \PY{k}{end}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{cell1} \PY{o}{=} \PY{n}{Cell}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{;}\PY{l+m+mf}{2.0}\PY{p}{;}\PY{l+m+mf}{3.0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{cell2} \PY{o}{=} \PY{n}{Cell}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{4.0}\PY{p}{;}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+         \PY{n}{population} \PY{o}{=} \PY{n}{construct}\PY{p}{(}\PY{n}{Population}\PY{p}{,}\PY{n}{deepcopy}\PY{p}{(}\PY{p}{[}\PY{n}{cell1}\PY{p}{,}\PY{n}{cell2}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} Make a Population from cells}
+         \PY{n}{cell3} \PY{o}{=} \PY{n}{Cell}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{3.0}\PY{p}{;}\PY{l+m+mf}{2.0}\PY{p}{;}\PY{l+m+mf}{5.0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{cell4} \PY{o}{=} \PY{n}{Cell}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{4.0}\PY{p}{;}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+         \PY{n}{population2} \PY{o}{=} \PY{n}{construct}\PY{p}{(}\PY{n}{Population}\PY{p}{,}\PY{n}{deepcopy}\PY{p}{(}\PY{p}{[}\PY{n}{cell3}\PY{p}{,}\PY{n}{cell4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{tissue1} \PY{o}{=} \PY{n}{construct}\PY{p}{(}\PY{n}{Tissue}\PY{p}{,}\PY{n}{deepcopy}\PY{p}{(}\PY{p}{[}\PY{n}{population}\PY{p}{,}\PY{n}{population2}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c}{\PYZsh{} Make a Tissue from Populations}
+         \PY{n}{tissue2} \PY{o}{=} \PY{n}{construct}\PY{p}{(}\PY{n}{Tissue}\PY{p}{,}\PY{n}{deepcopy}\PY{p}{(}\PY{p}{[}\PY{n}{population2}\PY{p}{,}\PY{n}{population}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{embryo} \PY{o}{=} \PY{n}{construct}\PY{p}{(}\PY{n}{Embryo}\PY{p}{,}\PY{n}{deepcopy}\PY{p}{(}\PY{p}{[}\PY{n}{tissue1}\PY{p}{,}\PY{n}{tissue2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{c}{\PYZsh{} Make an embryo from Tissues}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{cell\PYZus{}ode}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{cell}\PY{p}{,}\PY{n}{dcell}\PY{p}{)}
+           \PY{n}{m} \PY{o}{=} \PY{n}{mean}\PY{p}{(}\PY{n}{cell}\PY{p}{)}
+           \PY{k}{for} \PY{n}{i} \PY{k}{in} \PY{n}{eachindex}\PY{p}{(}\PY{n}{cell}\PY{p}{)}
+             \PY{n}{dcell}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{m}\PY{o}{*}\PY{n}{cell}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+           \PY{k}{end}
+         \PY{k}{end}
+         \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{embryo\PYZus{}ode}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{embryo}\PY{p}{,}\PY{n}{dembryo}\PY{p}{)}
+           \PY{k}{for} \PY{p}{(}\PY{n}{cell}\PY{p}{,}\PY{n}{y}\PY{p}{,}\PY{n}{z}\PY{p}{)} \PY{k}{in} \PY{n}{LevelIterIdx}\PY{p}{(}\PY{n}{embryo}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{cell\PYZus{}ode}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{cell}\PY{p}{,}\PY{p}{@}\PY{n}{view} \PY{n}{dembryo}\PY{p}{[}\PY{n}{y}\PY{p}{:}\PY{n}{z}\PY{p}{]}\PY{p}{)}
+           \PY{k}{end}
+         \PY{k}{end}
+         
+         \PY{c}{\PYZsh{} Have a cell divide at t=0.5}
+         \PY{n}{tstop} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{]}
+         \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{grow\PYZus{}condition}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{integrator}\PY{p}{)}
+           \PY{n}{t} \PY{n}{∈} \PY{n}{tstop}
+         \PY{k}{end}
+         \PY{k}{function}\PY{n+nf}{ }\PY{n+nf}{grow\PYZus{}affect}\PY{o}{!}\PY{p}{(}\PY{n}{integrator}\PY{p}{)}
+           \PY{n}{add\PYZus{}daughter!}\PY{p}{(}\PY{n}{integrator}\PY{p}{,}\PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{k}{end}
+         \PY{n}{growing\PYZus{}cb} \PY{o}{=} \PY{n}{DiscreteCallback}\PY{p}{(}\PY{n}{grow\PYZus{}condition}\PY{p}{,}\PY{n}{grow\PYZus{}affect!}\PY{p}{)}
+         
+         \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{embryo\PYZus{}ode}\PY{p}{,}\PY{n}{embryo}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{callback}\PY{o}{=}\PY{n}{growing\PYZus{}cb}\PY{p}{,}\PY{n}{tstops}\PY{o}{=}\PY{n}{tstop}\PY{p}{)}
+         
+         \PY{n}{sol}\PY{p}{[}\PY{k}{end}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} Embryo\{Tissue\{Population\{Cell\{Float64\},Float64\},Float64\},Float64\}(Tissue\{Population\{Cell\{Float64\},Float64\},Float64\}[Tissue\{Population\{Cell\{Float64\},Float64\},Float64\}(Population\{Cell\{Float64\},Float64\}[Population\{Cell\{Float64\},Float64\}(Cell\{Float64\}[Cell\{Float64\}([0.290911,0.581821,0.872732]),Cell\{Float64\}([1.16364,1.45455]),Cell\{Float64\}([0.0,0.0,0.0])],Float64[],[3,5,8]),Population\{Cell\{Float64\},Float64\}(Cell\{Float64\}[Cell\{Float64\}([0.600023,0.400015,1.00004]),Cell\{Float64\}([0.80003,1.20005])],Float64[],[3,5])],Float64[],[8,13]),Tissue\{Population\{Cell\{Float64\},Float64\},Float64\}(Population\{Cell\{Float64\},Float64\}[Population\{Cell\{Float64\},Float64\}(Cell\{Float64\}[Cell\{Float64\}([0.600023,0.400015,1.00004]),Cell\{Float64\}([0.80003,1.20005])],Float64[],[3,5]),Population\{Cell\{Float64\},Float64\}(Cell\{Float64\}[Cell\{Float64\}([0.250004,0.500008,0.750013]),Cell\{Float64\}([1.00002,1.25002])],Float64[],[3,5])],Float64[],[5,10])],Float64[],[13,23])
+\end{Verbatim}
+        
+    \section{That's the simulation of deterministic
+models}\label{thats-the-simulation-of-deterministic-models}
+
+\subsection{Let's add stochasticity}\label{lets-add-stochasticity}
+
+    \subsection{Stochastic Differential
+Equations}\label{stochastic-differential-equations}
+
+\[ du = f(t,u)dt + \sum_i g_i(t,u)dW^i \]
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  The $f$ term is the deterministic or ``drift'' term
+\item
+  The $g$ term is the noise or ``diffusion term
+\end{itemize}
+
+Well-known model: the Black-Scholes Model
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  My stock is growing at an average rate of 101\%
+\item
+  However, the value of my money has fluctuatations of 87\% of its
+  current value
+\end{itemize}
+
+\[ du = 1.01u + 0.87dW_t \]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}
+        \PY{n}{α}\PY{o}{=}\PY{l+m+mf}{1.01}\PY{p}{;} \PY{n}{β}\PY{o}{=}\PY{l+m+mf}{0.87}\PY{p}{;} \PY{n}{u₀}\PY{o}{=}\PY{l+m+mf}{1.0}
+        \PY{n}{f}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{n}{α}\PY{o}{*}\PY{n}{u}
+        \PY{n}{g}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{n}{β}\PY{o}{*}\PY{n}{u}
+        \PY{n}{f}\PY{p}{(}\PY{p}{:}\PY{p}{:}\PY{n}{Type}\PY{p}{\PYZob{}}\PY{n}{Val}\PY{p}{\PYZob{}}\PY{p}{:}\PY{n}{analytic}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{n}{t}\PY{p}{,}\PY{n}{u₀}\PY{p}{,}\PY{n}{W}\PY{p}{)} \PY{o}{=} \PY{n}{u₀}\PY{o}{*}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{α}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{β}\PY{o}{\PYZca{}}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{n}{t}\PY{o}{+}\PY{n}{β}\PY{o}{*}\PY{n}{W}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{SDEProblem}\PY{p}{(}\PY{n}{f}\PY{p}{,}\PY{n}{g}\PY{p}{,}\PY{n}{u₀}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{EM}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{\PYZca{}}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{plot\PYZus{}analytic}\PY{o}{=}\PY{n}{true}\PY{p}{)}
+\end{Verbatim}
+
+    
+    
+    \subsection{Fast adaptive methods are unique to
+DifferentialEquations.jl}\label{fast-adaptive-methods-are-unique-to-differentialequations.jl}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{sol} \PY{o}{=}\PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{SRIW1}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{plot\PYZus{}analytic}\PY{o}{=}\PY{n}{true}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{They tend to be orders of magnitude faster than standard
+methods}\label{they-tend-to-be-orders-of-magnitude-faster-than-standard-methods}
+
+Many models cannot be solved without these new methods. Even those that
+can are faster with them.
+
+    \subsection{Gillespie Simulations}\label{gillespie-simulations}
+
+Gillespie simulations are discrete models which change stochastically
+over time.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  A protein binds to DNA at a rate X
+\item
+  A protein is created at a rate Y
+\end{itemize}
+
+These types of models are related to differential equations
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  When the number of objects gets high, it converges for an SDE on the
+  concentrations
+\item
+  When the number gets really high, it converges to a deterministic ODE
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{rate} \PY{o}{=} \PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{\PYZhy{}\PYZgt{}} \PY{p}{(}\PY{l+m+mf}{0.1}\PY{o}{/}\PY{l+m+mf}{1000.0}\PY{p}{)}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{affect!} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{integrator}\PY{p}{)}
+           \PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+           \PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{end}
+         \PY{n}{jump} \PY{o}{=} \PY{n}{ConstantRateJump}\PY{p}{(}\PY{n}{rate}\PY{p}{,}\PY{n}{affect!}\PY{p}{)}
+         
+         \PY{n}{rate} \PY{o}{=} \PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{\PYZhy{}\PYZgt{}} \PY{l+m+mf}{0.01}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{affect!} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{integrator}\PY{p}{)}
+           \PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}
+           \PY{n}{integrator}\PY{o}{.}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{end}
+         \PY{n}{jump2} \PY{o}{=} \PY{n}{ConstantRateJump}\PY{p}{(}\PY{n}{rate}\PY{p}{,}\PY{n}{affect!}\PY{p}{)}
+         \PY{n}{jump\PYZus{}prob} \PY{o}{=} \PY{n}{JumpProblem}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Direct}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{jump}\PY{p}{,}\PY{n}{jump2}\PY{p}{)}
+         
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{jump\PYZus{}prob}\PY{p}{,}\PY{n}{Discrete}\PY{p}{(}\PY{n}{apply\PYZus{}map}\PY{o}{=}\PY{n}{false}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Mix jumps and differential
+equations}\label{mix-jumps-and-differential-equations}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+           \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000} \PY{o}{\PYZhy{}} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000}
+         \PY{k}{end}
+         \PY{n}{diff\PYZus{}g} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+           \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+         \PY{k}{end}
+         
+         \PY{n}{prob} \PY{o}{=} \PY{n}{SDEProblem}\PY{p}{(}\PY{n}{diff\PYZus{}f}\PY{p}{,}\PY{n}{diff\PYZus{}g}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{999.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{jump\PYZus{}prob} \PY{o}{=} \PY{n}{JumpProblem}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Direct}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{jump}\PY{p}{,}\PY{n}{jump2}\PY{p}{)}
+         \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{jump\PYZus{}prob}\PY{p}{,}\PY{n}{SRIW1}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{These features together allow for expressive scientific
+modeling}\label{these-features-together-allow-for-expressive-scientific-modeling}
+
+Let's go back to the multiscale embyro model:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  We can have cell proteins change according to a stochastic
+  differential equation
+\item
+  A rate of division can be dependent on a specific ``growth factor''
+\item
+  ``Jumps'' using this rate can cause cell division, growing our
+  multiscale model
+\item
+  We get high performance algorithms and optimized implementations the
+  whole way down.
+\end{itemize}
+
+\textless{}3 Julia
+
+    \subsection{Addons}\label{addons}
+
+Up until now, I have shown how to solve many different equations and
+encode a wide variety of models to simulate using the various solvers in
+DifferentialEquations.jl. But because all of this uses a single
+interface, an addon suite was able to be developed.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Tools for automatic parallelization of Monte Carlo simulations
+\item
+  Uncertainty quantification
+\item
+  Parameter estimation and data fitting
+\end{itemize}
+
+    \subsection{Monte Carlo Simulations}\label{monte-carlo-simulations}
+
+Many times you need to solve the same equation multiple times. This is
+especially true for stochastic simulations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{pf\PYZus{}func} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+           \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{*} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+           \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{3} \PY{o}{*} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{+} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{k}{end}
+         \PY{n}{pf} \PY{o}{=} \PY{n}{ParameterizedFunction}\PY{p}{(}\PY{n}{pf\PYZus{}func}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{1.5}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{pg\PYZus{}func} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{p}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+           \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+           \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{p}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{k}{end}
+         \PY{n}{pg} \PY{o}{=} \PY{n}{ParameterizedFunction}\PY{p}{(}\PY{n}{pg\PYZus{}func}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{)}
+         \PY{n}{prob} \PY{o}{=} \PY{n}{SDEProblem}\PY{p}{(}\PY{n}{pf}\PY{p}{,}\PY{n}{pg}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{10.0}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{prob\PYZus{}func} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+           \PY{n}{set\PYZus{}param\PYZus{}values!}\PY{p}{(}\PY{n}{prob}\PY{o}{.}\PY{n}{g}\PY{p}{,}\PY{l+m+mf}{0.3}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+           \PY{n}{prob}
+         \PY{k}{end}
+         \PY{n}{monte\PYZus{}prob} \PY{o}{=} \PY{n}{MonteCarloProblem}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{prob\PYZus{}func}\PY{o}{=}\PY{n}{prob\PYZus{}func}\PY{p}{)}
+         \PY{n}{sim} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{monte\PYZus{}prob}\PY{p}{,}\PY{n}{SRIW1}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{num\PYZus{}monte}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{n}{linealpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{p}{:}\PY{n}{blue}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{The Timeseries\PYZsq{}}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plot!}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{n}{linealpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{,}\PY{n}{color}\PY{o}{=}\PY{p}{:}\PY{n}{red}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{summ} \PY{o}{=} \PY{n}{MonteCarloSummary}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mf}{0.1}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{gr}\PY{p}{(}\PY{p}{)} \PY{c}{\PYZsh{} Note that plotly does not support ribbon plots}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{summ}\PY{p}{,}\PY{n}{fillalpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Uncertainty
+Quantification}\label{uncertainty-quantification}
+
+Estimate the uncertainty in the solution due to numerical error
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{fitz} \PY{o}{=} \PY{p}{@}\PY{n}{ode\PYZus{}def\PYZus{}nohes} \PY{n}{FitzhughNagumo} \PY{k}{begin}
+          \PY{n}{dV} \PY{o}{=} \PY{n}{c}\PY{o}{*}\PY{p}{(}\PY{n}{V} \PY{o}{\PYZhy{}} \PY{n}{V}\PY{o}{\PYZca{}}\PY{l+m+mi}{3}\PY{o}{/}\PY{l+m+mi}{3} \PY{o}{+} \PY{n}{R}\PY{p}{)}
+          \PY{n}{dR} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{c}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{V} \PY{o}{\PYZhy{}}  \PY{n}{a} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{o}{*}\PY{n}{R}\PY{p}{)}
+        \PY{k}{end} \PY{n}{a}\PY{o}{=}\PY{l+m+mf}{0.2} \PY{n}{b}\PY{o}{=}\PY{l+m+mf}{0.2} \PY{n}{c}\PY{o}{=}\PY{l+m+mf}{3.0}
+        \PY{n}{u0} \PY{o}{=} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{;}\PY{l+m+mf}{1.0}\PY{p}{]}
+        \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{20.0}\PY{p}{)}
+        \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{fitz}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{cb} \PY{o}{=} \PY{n}{AdaptiveProbIntsUncertainty}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{monte\PYZus{}prob} \PY{o}{=} \PY{n}{MonteCarloProblem}\PY{p}{(}\PY{n}{prob}\PY{p}{)}
+        \PY{n}{sim} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{monte\PYZus{}prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{num\PYZus{}monte}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{callback}\PY{o}{=}\PY{n}{cb}\PY{p}{,}\PY{n}{abstol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}1}\PY{p}{)}
+        \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{linealpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{sim} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{monte\PYZus{}prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{num\PYZus{}monte}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{callback}\PY{o}{=}\PY{n}{cb}\PY{p}{,}\PY{n}{abstol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}6}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{)}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{linealpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Case Study: Parameter
+Estimation}\label{case-study-parameter-estimation}
+
+Instead of simply solving differential equation models, one can ask the
+inverse problem: given that I see data like \texttt{y}, what needs to be
+true about the model such that we can match the data?
+
+The act of estimating the parameters for a mechanistic differential
+equation model is called parameter estimation.
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Parameter estimation required repeated solving of differential
+  equations
+\item
+  Solving equations must be fast
+\item
+  It requires access to optimization routines (global optimization is
+  necessary)
+\item
+  Machine learning tools (regularization, cross validation, etc.) are a
+  must
+\end{itemize}
+
+Thus DifferentialEquations.jl is well-suited for handling these kinds of
+problems.
+
+    \subsection{Problem Setup}\label{problem-setup}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}
+        \PY{n}{lotka} \PY{o}{=} \PY{p}{@}\PY{n}{ode\PYZus{}def\PYZus{}nohes} \PY{n}{LotkaVolterraTest} \PY{k}{begin}
+          \PY{n}{dx} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{n}{y}
+          \PY{n}{dy} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{c}\PY{o}{*}\PY{n}{y} \PY{o}{+} \PY{n}{d}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{n}{y}
+        \PY{k}{end} \PY{n}{a}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{l+m+mf}{1.5} \PY{n}{b}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{l+m+mf}{1.0} \PY{n}{c}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{l+m+mf}{3.0} \PY{n}{d}\PY{o}{=}\PY{o}{\PYZgt{}}\PY{l+m+mf}{1.0}
+        
+        \PY{n}{u0} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{;}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{;} \PY{n}{tspan} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{10.0}\PY{p}{)}\PY{p}{;} \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{lotka}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
+        \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Vern8}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{abstol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}14}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}14}\PY{p}{)}\PY{p}{;} \PY{n}{t} \PY{o}{=} \PY{n}{collect}\PY{p}{(}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{)}
+        \PY{n}{randomized} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{sol}\PY{p}{(}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{01}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{k}{in} \PY{l+m+mi}{1}\PY{p}{:}\PY{n}{length}\PY{p}{(}\PY{n}{t}\PY{p}{)}\PY{p}{]}
+        \PY{k}{using} \PY{n}{RecursiveArrayTools}\PY{p}{;} \PY{n}{data} \PY{o}{=} \PY{n}{vecvec\PYZus{}to\PYZus{}mat}\PY{p}{(}\PY{n}{randomized}\PY{p}{)}\PY{p}{;} 
+        \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{plotdensity}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{;} \PY{n}{scatter!}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+    
+    
+    \subsection{We can tell it to build an objective function that
+internally uses the DiffEq
+solver}\label{we-can-tell-it-to-build-an-objective-function-that-internally-uses-the-diffeq-solver}
+
+This objective function has dispatches to work with all of the common
+optimization packages in Julia (JuMP/MathProgBase, Optim, BlackBoxOptim,
+\ldots{})
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{obj} \PY{o}{=} \PY{n}{build\PYZus{}loss\PYZus{}objective}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{CostVData}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{data}\PY{p}{)}\PY{p}{,}\PY{n}{maxiters}\PY{o}{=}\PY{l+m+mi}{10000}\PY{p}{,}\PY{n}{verbose}\PY{o}{=}\PY{n}{true}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} (::DiffEqObjective) (generic function with 2 methods)
+\end{Verbatim}
+        
+    Let's recover the parameters using the NLopt.jl package
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{using} \PY{n}{NLopt}
+        \PY{n}{opt} \PY{o}{=} \PY{n}{Opt}\PY{p}{(}\PY{p}{:}\PY{n}{LN\PYZus{}BOBYQA}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{lower\PYZus{}bounds!}\PY{p}{(}\PY{n}{opt}\PY{p}{,}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n}{upper\PYZus{}bounds!}\PY{p}{(}\PY{n}{opt}\PY{p}{,}\PY{l+m+mi}{5}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+        \PY{n}{min\PYZus{}objective!}\PY{p}{(}\PY{n}{opt}\PY{p}{,} \PY{n}{obj}\PY{p}{)}
+        \PY{n}{maxeval!}\PY{p}{(}\PY{n}{opt}\PY{p}{,} \PY{k+kt}{Int}\PY{p}{(}\PY{l+m+mf}{1e5}\PY{p}{)}\PY{p}{)}
+        \PY{p}{(}\PY{n}{minf}\PY{p}{,}\PY{n}{minx}\PY{p}{,}\PY{n}{ret}\PY{p}{)} \PY{o}{=} \PY{n}{NLopt}\PY{o}{.}\PY{n}{optimize}\PY{p}{(}\PY{n}{opt}\PY{p}{,}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} (0.003946719422749266,[1.50002,0.999185,2.9992,0.998736],:ROUNDOFF\_LIMITED)
+\end{Verbatim}
+        
+    \subsection{What's Next?}\label{whats-next}
+
+The next focus for DifferentialEquations.jl development is PDEs and
+stiff problems
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Native Julia stiff solvers are currently a lower order of accuracy
+  then the top methods (@miguelraz's GSoC project will help here)
+\item
+  Parallel-in-time Neural Network methods for large systems of stiff
+  ODEs/SDEs (@akaysh's GSoC project)
+\item
+  Fast matrix-free operators for FDM derivative discretizations
+  (@shivin9's GSoC project)
+\item
+  A wrapper for FEniCS's FEM toolbox (@ysimillides's GSoC project)
+\item
+  High order Rosenbrock methods
+\item
+  Stiffness detection and switching (already implemented, but no default
+  methods)
+\end{itemize}
+
+    Other areas which are under development are:
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  New high order (+ adaptive) methods for SDEs will be published soon
+  (orders of magnitude improvement)
+\item
+  Integration of regularization, maximum likelihood, and Bayesian (MCMC)
+  techniques for parameter estimation (@ayush-iitkgp's GSoC project)
+\item
+  Boundary value problem solvers (@YingboMa's GSoC project)
+\item
+  More geometric and symplectic integrators
+\item
+  Integration of DiffEq with applications (large scale biological
+  models, Pk/Pd estimation, tools for physical and financial modeling)
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
