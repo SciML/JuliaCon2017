@@ -1051,7 +1051,7 @@ These types of models are related to differential equations
 \end{itemize}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{150.0}\PY{p}{)}\PY{p}{)}
          
          \PY{n}{rate} \PY{o}{=} \PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{\PYZhy{}\PYZgt{}} \PY{p}{(}\PY{l+m+mf}{0.1}\PY{o}{/}\PY{l+m+mf}{1000.0}\PY{p}{)}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
          \PY{n}{jump\PYZus{}affect!} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{integrator}\PY{p}{)}
@@ -1072,21 +1072,21 @@ These types of models are related to differential equations
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
 \end{Verbatim}
 
     \subsection{Mix jumps and differential
 equations}\label{mix-jumps-and-differential-equations}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
            \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000} \PY{o}{\PYZhy{}} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000}
          \PY{k}{end}
          \PY{n}{diff\PYZus{}g} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
            \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
          \PY{k}{end}
          
-         \PY{n}{prob} \PY{o}{=} \PY{n}{SDEProblem}\PY{p}{(}\PY{n}{diff\PYZus{}f}\PY{p}{,}\PY{n}{diff\PYZus{}g}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{999.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{prob} \PY{o}{=} \PY{n}{SDEProblem}\PY{p}{(}\PY{n}{diff\PYZus{}f}\PY{p}{,}\PY{n}{diff\PYZus{}g}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{999.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{,}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{1.0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{150.0}\PY{p}{)}\PY{p}{)}
          \PY{n}{jump\PYZus{}prob} \PY{o}{=} \PY{n}{JumpProblem}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Direct}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{jump}\PY{p}{,}\PY{n}{jump2}\PY{p}{)}
          \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{jump\PYZus{}prob}\PY{p}{,}\PY{n}{SRIW1}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
 \end{Verbatim}
