@@ -441,14 +441,12 @@ Solve for $u(t)$ for $t\in[0,5]$
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{gr}\PY{p}{(}\PY{p}{)}
         \PY{c}{\PYZsh{} Use the plot recipe, along with some plotting attributes}
         \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{,}\PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{My Bank Account}\PY{l+s}{\PYZdq{}}\PY{p}{,}
              \PY{n}{xaxis}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Time (t)}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{n}{yaxis}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{Money!}\PY{l+s}{\PYZdq{}}\PY{p}{,}\PY{n}{legend}\PY{o}{=}\PY{n}{false}\PY{p}{)}
 \end{Verbatim}
 
-    
-    
     \subsection{Controlling the Solvers}\label{controlling-the-solvers}
 
 See http://docs.juliadiffeq.org/latest/basics/common\_solver\_opts.html
@@ -688,7 +686,7 @@ type}\label{differentialequations.jl-respects-the-users-input-type}
          \PY{n}{f\PYZus{}SA}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{n}{A}\PY{o}{*}\PY{n}{u}
          \PY{n}{prob} \PY{o}{=} \PY{n}{ODEProblem}\PY{p}{(}\PY{n}{f\PYZus{}SA}\PY{p}{,}\PY{n}{u0}\PY{p}{,}\PY{n}{tspan}\PY{p}{)}
          \PY{n}{sol} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{)}
-         \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
+         \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{gr}\PY{p}{(}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sol}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -726,11 +724,7 @@ type}\label{differentialequations.jl-respects-the-users-input-type}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-14.778112197857341
-14.7781121978613
-22.167168296786013
-22.16716829679195
-
+14.
     \end{Verbatim}
 
     \subsection{DifferentialEquations.jl is unique when speed
@@ -1008,7 +1002,7 @@ Well-known model: the Black-Scholes Model
 \[ du = 1.01u + 0.87dW_t \]
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{;} \PY{n}{gr}\PY{p}{(}\PY{p}{)}
          \PY{n}{α}\PY{o}{=}\PY{l+m+mf}{1.01}\PY{p}{;} \PY{n}{β}\PY{o}{=}\PY{l+m+mf}{0.87}\PY{p}{;} \PY{n}{u₀}\PY{o}{=}\PY{l+m+mf}{1.0}
          \PY{n}{bs\PYZus{}f}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{n}{α}\PY{o}{*}\PY{n}{u}
          \PY{n}{bs\PYZus{}g}\PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{=} \PY{n}{β}\PY{o}{*}\PY{n}{u}
@@ -1057,7 +1051,7 @@ These types of models are related to differential equations
 \end{itemize}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{prob} \PY{o}{=} \PY{n}{DiscreteProblem}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{999}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,}\PY{l+m+mf}{250.0}\PY{p}{)}\PY{p}{)}
          
          \PY{n}{rate} \PY{o}{=} \PY{p}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{)} \PY{o}{\PYZhy{}\PYZgt{}} \PY{p}{(}\PY{l+m+mf}{0.1}\PY{o}{/}\PY{l+m+mf}{1000.0}\PY{p}{)}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
          \PY{n}{jump\PYZus{}affect!} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{integrator}\PY{p}{)}
@@ -1085,7 +1079,7 @@ These types of models are related to differential equations
 equations}\label{mix-jumps-and-differential-equations}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{diff\PYZus{}f} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
            \PY{n}{du}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{=} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000} \PY{o}{\PYZhy{}} \PY{n}{u}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{u}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{100000}
          \PY{k}{end}
          \PY{n}{diff\PYZus{}g} \PY{o}{=} \PY{k}{function}\PY{n+nf}{ }\PY{o}{(}\PY{n}{t}\PY{p}{,}\PY{n}{u}\PY{p}{,}\PY{n}{du}\PY{p}{)}
@@ -1189,7 +1183,7 @@ Estimate the uncertainty in the solution due to numerical error
          \PY{n}{cb} \PY{o}{=} \PY{n}{AdaptiveProbIntsUncertainty}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
          \PY{n}{monte\PYZus{}prob} \PY{o}{=} \PY{n}{MonteCarloProblem}\PY{p}{(}\PY{n}{prob}\PY{p}{)}
          \PY{n}{sim} \PY{o}{=} \PY{n}{solve}\PY{p}{(}\PY{n}{monte\PYZus{}prob}\PY{p}{,}\PY{n}{Tsit5}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{num\PYZus{}monte}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,}\PY{n}{callback}\PY{o}{=}\PY{n}{cb}\PY{p}{,}\PY{n}{abstol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{,}\PY{n}{reltol}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}1}\PY{p}{)}
-         \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{linealpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
+         \PY{k}{using} \PY{n}{Plots}\PY{p}{;} \PY{n}{gr}\PY{p}{(}\PY{p}{)}\PY{p}{;} \PY{n}{plot}\PY{p}{(}\PY{n}{sim}\PY{p}{,}\PY{n}{vars}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{linealpha}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{)}
 \end{Verbatim}
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -1228,7 +1222,7 @@ problems.
     \subsection{Problem Setup}\label{problem-setup}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{;} \PY{n}{plotly}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{using} \PY{n}{DifferentialEquations}\PY{p}{,} \PY{n}{Plots}\PY{p}{;} \PY{n}{gr}\PY{p}{(}\PY{p}{)}
          \PY{n}{lotka} \PY{o}{=} \PY{p}{@}\PY{n}{ode\PYZus{}def\PYZus{}nohes} \PY{n}{LotkaVolterraTest} \PY{k}{begin}
            \PY{n}{dx} \PY{o}{=} \PY{n}{a}\PY{o}{*}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{b}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{n}{y}
            \PY{n}{dy} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{c}\PY{o}{*}\PY{n}{y} \PY{o}{+} \PY{n}{d}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{n}{y}
@@ -1275,7 +1269,7 @@ WARNING: using NLopt.population in module Main conflicts with an existing identi
     \end{Verbatim}
 
             \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}36}]:} (0.0038439610325858376,[1.50034,0.999574,2.99759,0.998632],:ROUNDOFF\_LIMITED)
+{\color{outcolor}Out[{\color{outcolor}36}]:} (0.39057497342225694,[1.58983,1.05184,2.75051,0.914458],:ROUNDOFF\_LIMITED)
 \end{Verbatim}
         
     \subsection{What's Next?}\label{whats-next}
